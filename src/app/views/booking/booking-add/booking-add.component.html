@@ -1,0 +1,279 @@
+<div class="row">
+    <div class="col-md-12">
+        <div class="card">
+            <div class="card-header">
+                <strong>Add Rent</strong>
+                <button *ngIf="type === 'view'"  [routerLink]="['../../list']"  cButton color="primary" variant="outline" class="back-button">
+                    <svg [cIcon]="icons.cilCaretLeft" size="md" title="List Icon"></svg>
+                </button>
+<!--                <button *ngIf="type === 'view' || type === 'edit'" (click)="listComponent.bill(state.data)"  cButton color="primary" variant="outline" class="back-button">-->
+<!--                    <svg [cIcon]="icons.cilCloudDownload" size="md" title="List Icon"></svg>-->
+<!--                </button>-->
+            </div>
+            <div class="card-body">
+                <form autocomplete="off" (ngSubmit)="submit()" [formGroup]="form" action="" method="post" enctype="multipart/form-data" class="form-horizontal">
+                    <div class="r form-group row">
+                        <label class="col-md-3 col-form-label">Date</label>
+                        <div class="col-md-6">
+                            <input  formControlName="date" type="date" class="form-control" placeholder="Date" (ngModelChange)="getBookedTimes($event)" >
+                             <!--  <input formControlName="start" type="datetime-local" class="form-control" placeholder="Date">  -->
+                        </div>
+                    </div>
+
+                    <br *ngIf="type !== 'add'">
+                    <div class="r form-group row" *ngIf="type !== 'add' && !timeEdited">
+                        <label class="col-md-3 col-form-label">Time</label>
+                        <div class="col-md-9">
+                            <div class="input-group mb-3">
+                                <span class="input-group-text">From</span>
+                                <span class="input-group-text">{{state.data.start | date:'shortTime':'UTC'}}</span>
+                                <span class="input-group-text">To</span>
+                                <span class="input-group-text">{{state.data.end | date:'shortTime':'UTC'}}</span>
+                                <span *ngIf="type !== 'view'" class="input-group-text" style="cursor: pointer;background: #fabf514d" >
+                                    <div  (click)="toggleLiveDemo()"><c-icon class="text-warning" name="cil-pencil" size="lg"></c-icon></div>
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <br *ngIf="(type == 'add' && form.value['start'] !== '' && form.value['end'] !== '') || timeEdited">
+                    <div class="r form-group row" *ngIf="(type == 'add' && form.value['start'] !== '' && form.value['end'] !== '') || timeEdited">
+                        <label class="col-md-3 col-form-label">Time</label>
+                        <div class="col-md-9">
+                            <div class="input-group mb-3">
+                                <span class="input-group-text">From</span>
+                                <input disabled [value]="form.value['start'].split('T')[1]" type="text" class="form-control">
+                                <span class="input-group-text">To</span>
+                                <input disabled [value]="form.value['end'].split('T')[1]" type="text" class="form-control">
+                                <span *ngIf="type !== 'view'" class="input-group-text" style="cursor: pointer;background: #fabf514d">
+                                    <div  (click)="toggleLiveDemo()"><c-icon class="text-warning" name="cil-pencil" size="lg"></c-icon></div>
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- <div class="r form-group row" *ngIf="isDatePicked"> 
+                        <label class="col-md-3 col-form-label">Time</label>
+                        <div class="row col-md-9">
+                            <label class="col-md-2 col-form-label">Start</label>
+                            <div class="col-md-3">
+                                <input formControlName="start" type="time" class="form-control" placeholder="Date">
+                            </div>
+                            <label class="col-md-2 col-form-label">End</label>
+                            <div class="col-md-3">
+                                <input formControlName="start" type="time" class="form-control" placeholder="Date">
+                            </div>
+                        </div>
+                    </div> -->
+                    <!--          <div class="r form-group row">-->
+                    <!--            <div class="col-10"></div>-->
+                    <!--            <div class="col-2">-->
+                    <!--              <button type="submit" style="float: right" cButton color="primary">Save</button>-->
+                    <!--            </div>-->
+                    <!--          </div>-->
+                </form>
+                <br>
+
+<!--                <div class="r form-group row">-->
+<!--                    <label class="col-md-3 col-form-label">Customer</label>-->
+<!--                    <div class="col-md-9">-->
+<!--                        <div class="row" *ngIf="type !== 'view'">-->
+<!--                            <div class="col-md-4">-->
+<!--                                <input (keyup)="filter($event)" type="text" class="form-control" placeholder="Search By Name">-->
+<!--                            </div>-->
+<!--                            <div class="col-md-1">-->
+<!--                                <button (click)="isAddClicked=true;customer=null" cButton color="primary" variant="outline">-->
+<!--                                    <svg [cIcon]="icons.cilPlus" size="md" title="List Icon"></svg>-->
+<!--                                </button>-->
+<!--                            </div>-->
+<!--                            <div class="col-md-7" *ngIf="customers.length <= 0">-->
+<!--                                <c-alert *ngIf="isCFFilterToothed" color="warning">No Customer for given name, Please fill customer details below</c-alert>-->
+<!--                            </div>-->
+<!--                            <div class="col-md-7" *ngIf="customers.length > 0">-->
+<!--                                <select (change)="customerSelect($event)" class="form-select" multiple aria-label="multiple select example">-->
+<!--                                    <option >Select One Customer</option>-->
+<!--                                    <option *ngFor="let c of customers" [value]="c.id" >{{c.name}}</option>-->
+<!--                                </select>-->
+<!--                            </div>-->
+<!--                        </div>-->
+<!--                    </div>-->
+<!--                </div>-->
+
+                <div class="r form-group row">
+                    <label *ngIf="type !== 'view'" class="col-md-3 col-form-label">Customer</label>
+                    <div class="col-md-9">
+                        <div class="row" *ngIf="type !== 'view'">
+                            <!--              <div class="col-md-4">-->
+                            <!--                <input (keyup)="filter($event)" type="text" class="form-control" placeholder="Search By Name">-->
+                            <!--              </div>-->
+                            <div class="autocomplete col-md-7" style="margin-left: 10px">
+                                <input autocomplete="off" class="form-control" (keyup)="filter($event)" [(ngModel)]="selectedCustomerName"
+                                       id="myInput" type="text" name="myCountry" placeholder="Customer By Name">
+                                <div #customerDropdown *ngIf="displayCustomers" class="autocomplete-items" id="myInputautocomplete-list">
+                                    <div (click)="customerSelect(c)" *ngFor="let c of customers">
+                                        <strong>{{c.name}}</strong>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-1">
+                                <button (click)="isAddClicked=true;customer=null" cButton color="primary" variant="outline">
+                                    <svg [cIcon]="icons.cilPlus" size="md" title="List Icon"></svg>
+                                </button>
+                            </div>
+                            <div class="col-md-7" *ngIf="customers.length <= 0">
+                                <c-alert *ngIf="isCFFilterToothed" color="warning">No Customer for given name, Please add a new customer</c-alert>
+                            </div>
+                            <!--              <div class="col-md-7" *ngIf="customers.length > 0">-->
+                            <!--                <select (change)="customerSelect($event)" class="form-select" multiple aria-label="multiple select example">-->
+                            <!--                  <option >Select One Customer</option>-->
+                            <!--                  <option *ngFor="let c of customers" [value]="c.id" >{{c.name}}</option>-->
+                            <!--                </select>-->
+                            <!--              </div>-->
+                        </div>
+                    </div>
+                </div>
+                <br>
+                <div class="r form-group row" *ngIf="customer || isAddClicked">
+                    <app-customer-add-com
+                            (formChange)="customerChange($event)"
+                            [recoverable]="isAddClicked"
+                            (cancelEvent)="isAddClicked=false"
+                            [state]="{type: type != 'view' ? 'rent' : type, data: this.customer}"
+                            [rent]="true">
+                    </app-customer-add-com>
+                </div>
+                <br>
+
+                <div class="r form-group row">
+                    <label class="col-md-3 col-form-label">Rent Items</label>
+                    <div class="col-md-9" *ngIf="type === 'view'">
+                        <table class="table">
+                            <thead>
+                            <tr>
+                                <th scope="col">Item Name</th>
+                                <th scope="col">Price</th>
+                            </tr>
+                            </thead>
+                            <tbody *ngIf="state.data">
+                            <tr *ngFor="let item of state.data.bookedServices">
+                                <td>{{item.services.name}}</td>
+                                <td>{{item.price}}</td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="col-md-9" *ngIf="type !== 'view'">
+                        <app-services
+                                (onError)="serviceError($event)"
+                                [bookedService]="state && state.data.bookedServices ? state.data.bookedServices[i]: null"
+                                (formChange)="formChange($event)"
+                                (deleteIndex)="deleteItem($event)"
+                                (saveItem)="servicesList.push($event + 1)"
+                                [index]="i"
+                                [isLast]="i ==servicesList.length-1"
+                                *ngFor="let il of servicesList; index as i">
+                        </app-services>
+                    </div>
+                </div>
+                <hr>
+                <form [formGroup]="form">
+                    <div class="r form-group row">
+                        <label class="col-md-3 col-form-label">Total Amount (LKR)</label>
+                        <div class="col-md-9">
+                            <input formControlName="totalAmount" type="text" class="form-control">
+                        </div>
+                    </div>
+                </form>
+
+                <hr>
+                <div class="r form-group row" *ngIf="type==='add'">
+                    <label class="col-md-3 col-form-label">Advanced Amount (LKR)</label>
+                    <div class="col-md-9">
+                        <input (keyup)="advanceChange($event)" [(ngModel)]="advance" type="number" class="form-control">
+                    </div>
+                </div>
+                <div class="r form-group row" *ngIf="type==='edit'">
+                    <label class="col-md-3 col-form-label">New Payment Amount (LKR)</label>
+                    <div class="col-md-9">
+                        <input (keyup)="advanceChange($event)" [(ngModel)]="advance" type="number" class="form-control">
+                    </div>
+                </div>
+
+                <div class="r form-group row" *ngIf="type !=='add'">
+                    <label class="col-md-3 col-form-label">Advanced Payments (LKR)</label>
+                    <div class="col-md-9">
+                        <table class="table">
+                            <thead>
+                            <tr>
+                                <th scope="col">Date</th>
+                                <th scope="col">Amount</th>
+                            </tr>
+                            </thead>
+                            <tbody *ngIf="state.data">
+                            <tr *ngFor="let item of state.data.advancedPayments">
+                                <td>{{item.createdDate | date}}</td>
+                                <td>{{item.amount}}</td>
+                            </tr>
+                            </tbody>
+                            <tfoot>
+                            <tr>
+                                <th>Total Advanced Payments</th>
+                                <td>{{getTotalAdvance()}}</td>
+                            </tr>
+                            </tfoot>
+                        </table>
+                    </div>
+                </div>
+
+                <div class="r form-group row" *ngIf="type !=='add'">
+                    <label class="col-md-3 col-form-label">Payable Amount (LKR)</label>
+                    <div class="col-md-9">
+                        <input [disabled]="true" [value]="getPayable()" type="number" class="form-control">
+                    </div>
+                </div>
+
+                <div  class="form-group row error-message">
+                    <span>{{error}}</span>
+                </div>
+                <div  class="form-group row error-message">
+                    <span>{{serviceErrorMsg}}</span>
+                </div>
+
+
+                <br>
+                <div class="r form-group row" *ngIf="type !=='view'">
+                    <div class="col-10"></div>
+
+                    <div class="col-2">
+                        <button *ngIf="type === 'edit'" type="button" [routerLink]="['/booking/list']" cButton color="secondary">Cancel</button>
+                        <button [disabled]="error!=='' && serviceErrorMsg !==''" (click)="submit()" style="float: right" cButton color="primary">Save</button>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<c-modal #scrollingLongContentModal id="scrollingLongContentModal" backdrop="static" [visible]="visible" (visibleChange)="handleLiveDemoChange($event)">
+    <c-modal-header>
+        <h5 cModalTitle>Set time slot</h5>
+        <button [cModalToggle]="scrollingLongContentModal.id" cButtonClose></button>
+    </c-modal-header>
+    <c-modal-body>
+        <ng-container *ngTemplateOutlet="longContent"></ng-container>
+    </c-modal-body>
+    <c-modal-footer>
+        <button [disabled]="form.value['start'] == '' " [cModalToggle]="scrollingLongContentModal.id" (click)="slotSelect()" cButton color="primary">Set</button>
+    </c-modal-footer>
+</c-modal>
+
+<ng-template #longContent>
+    <div *ngIf="bookedSlots.length==0" class="container">
+        <app-slot-add (timeChange)="timeChange($event)"></app-slot-add>
+    </div>
+    <div *ngFor="let slot of bookedSlots;let i = index;" class="container">
+        <app-slot-add *ngIf="bookedSlots[i+1] !== undefined " [before]="i==0" (timeChange)="timeChange($event)" [slot]="slot" [from]="slot.end" [to]="bookedSlots[i+1].start" ></app-slot-add>
+        <app-slot-add *ngIf="bookedSlots[i+1] === undefined " [before]="i==0" (timeChange)="timeChange($event)" [slot]="slot" [from]="slot.end" [to]="undefined" ></app-slot-add>
+    </div>
+</ng-template>

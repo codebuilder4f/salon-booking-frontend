@@ -1,0 +1,62 @@
+<div class="row">
+  <div class="col-md-12">
+    <div class="card">
+      <div class="card-header" *ngIf="state.type !== 'rent'">
+        <strong>Add Customer</strong>
+        <button *ngIf="state.type === 'view'"  [routerLink]="['../../list']"  cButton color="primary" variant="outline" class="back-button">
+          <svg [cIcon]="icons.cilCaretLeft" size="md" title="List Icon"></svg>
+        </button>
+      </div>
+      <div class="card-body">
+        <form (change)="formChangeEvent()" (ngSubmit)="submit()" [formGroup]="form" action="" method="post" enctype="multipart/form-data" class="form-horizontal">
+          <div class="r form-group row">
+            <label class="col-md-3 col-form-label">Name</label>
+            <div class="col-md-9">
+              <input formControlName="name" type="text" class="form-control" placeholder="Name">
+            </div>
+          </div>
+          <div class="r form-group row">
+            <label class="col-md-3 col-form-label">Address</label>
+            <div class="col-md-9">
+              <input formControlName="address" type="text" class="form-control" placeholder="Address">
+            </div>
+          </div>
+          <div class="r form-group row">
+            <label class="col-md-3 col-form-label">NIC</label>
+            <div class="col-md-9">
+              <input formControlName="nic" type="text" class="form-control" placeholder="NIC">
+            </div>
+          </div>
+          <div class="r form-group row">
+            <label class="col-md-3 col-form-label">Email</label>
+            <div class="col-md-9">
+              <input formControlName="email" type="email" class="form-control" placeholder="Email">
+            </div>
+          </div>
+          <div class="r form-group row">
+            <label class="col-md-3 col-form-label">Mobile One</label>
+            <div class="col-md-9">
+              <input formControlName="mobileOne" type="number" class="form-control" placeholder="Mobile One">
+            </div>
+          </div>
+          <div class="r form-group row">
+            <label class="col-md-3 col-form-label">Mobile Two</label>
+            <div class="col-md-9">
+              <input formControlName="mobileTwo" type="text" class="form-control" placeholder="Mobile Two">
+            </div>
+          </div>
+          <div class="r form-group row" >
+            <div class="col-10"></div>
+            <div class="col-2"*ngIf="state.type =='rent' && recoverable">
+              <button (click)="cancel()" style="float: right" cButton color="warning">Cancel</button>
+            </div>
+            <div class="col-2" *ngIf="state.type!=='view' && state.type!=='rent'">
+              <button *ngIf="state.type === 'edit'" type="button" [routerLink]="['/customer/list']" cButton color="secondary">Cancel</button>
+              <button type="submit" style="float: right" cButton color="primary">Save</button>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>

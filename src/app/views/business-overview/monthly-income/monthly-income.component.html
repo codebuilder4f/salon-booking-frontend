@@ -1,0 +1,43 @@
+<c-card>
+    <c-card-body>
+        <div class="row" [formGroup]="form">
+            <div class="col-md-4 col-sm-4 col-lg-4">
+                <input cFormControl  type="date" formControlName="from" placeholder="Stock Item">
+            </div>
+            <div class="col-md-4 col-sm-4 col-lg-4">
+                <input cFormControl  type="date" formControlName="to" placeholder="Stock Item">
+            </div>
+            <div class="col-md-4 col-sm-4 col-lg-4">
+                <button [disabled]="!form.valid" (click)="filter()" cButton>Search</button>
+            </div>
+        </div>
+    </c-card-body>
+</c-card>
+
+
+<div class="table-responsive card">
+    <table class="table table-hover">
+        <thead>
+        <tr>
+            <th scope="col">No</th>
+            <th scope="col">Date</th>
+            <th scope="col">Income (LKR)</th>
+            <th scope="col">Stock Adding Cost (LKR)</th>
+            <th scope="col">Employee Payment (LKR)</th>
+            <th scope="col">Addition Payment (LKR)</th>
+            <th scope="col">Total Monthly Income (LKR)</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr *ngFor="let l of data;let i = index">
+            <td>{{i +1}}</td>
+            <td>{{l.month}}</td>
+            <td>{{l.income}}</td>
+            <td>{{l.stockCost}}</td>
+            <td>{{l.employeePayment}}</td>
+            <td>{{l.otherPayment}}</td>
+            <td>{{l.income - (l.stockCost+l.employeePayment+l.otherPayment)}}</td>
+        </tr>
+        </tbody>
+    </table>
+</div>

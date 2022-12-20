@@ -1,0 +1,31 @@
+<div class="row" style="margin-top: 5px;">
+    <div class="col-lg-3 col-sm-3 col-md-3">
+        <div  class="autocomplete">
+            <input #s="ngModel" #search class="form-control" [(ngModel)]="selectedServiceName" (keyup)="filterServices($event)"
+                   type="text" name="myCountry" placeholder="Stock Item By Name">
+            <div *ngIf="displayServices" class="autocomplete-items">
+                <div (click)="itemSelect(s)" *ngFor="let s of servicesList">
+                    <strong>{{s.name}} - {{s.price}}</strong>
+                </div>
+            </div>
+        </div>
+    </div>
+<!--    <div class="col-lg-3 col-sm-3 col-md-3">-->
+<!--        <input [disabled]="isDisabled" class="form-control" [(ngModel)]="price" (keyup)="priceChange($event)" type="number" name="myCountry" placeholder="Price">-->
+<!--    </div>-->
+    <div class="col-lg-3 col-sm-3 col-md-3">
+        <button *ngIf="!isSaved && (!bookedService || isLast)" (click)="save()" cButton color="primary" variant="outline">
+            <!--      <svg [cIcon]="icons.cilPlus" size="md" title="List Icon"></svg>-->
+            <svg [cIcon]="icons.cilPlus" size="md" title="List Icon"></svg>
+        </button>
+        <button  (click)="deleteItem()"  cButton color="warning" variant="outline">
+            <svg [cIcon]="icons.cilDelete" size="md" title="List Icon"></svg>
+            <!--      <svg [cIcon]="icons.cilPlus" size="md" title="List Icon"></svg>-->
+        </button>
+    </div>
+    <div style="margin-left: -38px;margin-top: 6px;padding-left: 0" class="col-lg-3 col-sm-3 col-md-3">
+        <span style="color: red" *ngIf="isError && s.touched">This is not valid</span>
+    </div>
+</div>
+
+

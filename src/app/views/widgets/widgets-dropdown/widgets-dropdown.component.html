@@ -1,0 +1,85 @@
+<c-row>
+  <c-col sm="6" xl="3" *ngIf="data[0]">
+    <c-widget-stat-a class="mb-4" color="primary" title="Booking Count">
+      <ng-template cTemplateId="widgetValueTemplate" ngPreserveWhitespaces>
+        <span *ngIf="data[0]">{{data[0].total}} </span>
+        <span *ngIf="!data[0]">0</span>
+        <span style="font-size: 10px; float: right">
+          ( <span *ngIf="booking7">Last 7 Days</span> <span *ngIf="!booking7">Last 30 Days</span>)
+        </span>
+      </ng-template>
+      <ng-template cTemplateId="widgetActionTemplate">
+        <c-dropdown alignment="end" variant="btn-group">
+          <button [caret]="false" cButton cDropdownToggle class="p-0" color="transparent">
+            <svg cIcon class="text-high-emphasis-inverse" name="cilOptions"></svg>
+          </button>
+          <ul cDropdownMenu>
+            <li (click)="bookingType(7)"><a cDropdownItem>Last 7 days</a></li>
+            <li (click)="bookingType(30)"><a cDropdownItem>Last 30 days</a></li>
+          </ul>
+        </c-dropdown>
+      </ng-template>
+
+      <ng-template cTemplateId="widgetChartTemplate">
+        <c-chart [data]="data[0]" [options]="options[0]" class="mt-3 mx-3" height="70" type="line"></c-chart>
+      </ng-template>
+    </c-widget-stat-a>
+  </c-col>
+
+  <c-col sm="6" xl="3" *ngIf="data[1]">
+    <c-widget-stat-a [title]="'Daily Income'" class="mb-4" color="info">
+      <ng-template cTemplateId="widgetValueTemplate" ngPreserveWhitespaces>
+        <span *ngIf="data[1]">{{data[1].total}} </span>
+        <span *ngIf="!data[1]">0</span>
+        <span style="font-size: 10px; float: right">
+          ( <span *ngIf="income7">Last 7 Days</span> <span *ngIf="!income7">Last 30 Days</span> )
+        </span>
+      </ng-template>
+      <ng-template cTemplateId="widgetActionTemplate">
+        <c-dropdown alignment="end" variant="btn-group">
+          <button [caret]="false" cButton cDropdownToggle class="p-0" color="transparent">
+            <svg cIcon class="text-high-emphasis-inverse" name="cilOptions"></svg>
+          </button>
+          <ul cDropdownMenu>
+            <li (click)="incomeType(7)"><a cDropdownItem>Last 7 days</a></li>
+            <li (click)="incomeType(30)"><a cDropdownItem>Last 30 days</a></li>
+          </ul>
+        </c-dropdown>
+      </ng-template>
+      <ng-template cTemplateId="widgetChartTemplate">
+        <c-chart [data]="data[1]" [options]="options[1]" class="mt-3 mx-3" height="70" type="line"></c-chart>
+      </ng-template>
+    </c-widget-stat-a>
+  </c-col>
+
+  <c-col sm="6" xl="3">
+    <c-widget-stat-a [title]="'Monthly Stock  Cost'" class="mb-4" color="warning">
+      <ng-template  cTemplateId="widgetValueTemplate" ngPreserveWhitespaces>
+        <span *ngIf="data[2]" >{{data[2].total}} </span>
+        <span *ngIf="!data[2]" >0</span>
+        <span style="font-size: 10px; float: right">
+          (Last 12 months)
+        </span>
+      </ng-template>
+      <ng-template cTemplateId="widgetChartTemplate">
+        <c-chart [data]="data[2]" [options]="options[2]" class="mt-3" height="70" type="line"></c-chart>
+      </ng-template>
+    </c-widget-stat-a>
+  </c-col>
+
+  <c-col sm="6" xl="3" *ngIf="data[0]">
+    <c-widget-stat-a class="mb-4" color="danger" title="Other Payments">
+      <ng-template cTemplateId="widgetValueTemplate" ngPreserveWhitespaces>
+        <span *ngIf="data[3]" >{{data[3].total}} </span>
+        <span *ngIf="!data[3]" >0</span>
+        <span style="font-size: 10px; float: right">
+          (Last 12 months)
+        </span>
+      </ng-template>
+      <ng-template cTemplateId="widgetChartTemplate">
+        <c-chart [data]="data[3]" [options]="options[3]" class="mt-3 mx-3" height="70" type="line"></c-chart>
+      </ng-template>
+    </c-widget-stat-a>
+  </c-col>
+
+</c-row>

@@ -1,0 +1,57 @@
+<div class="row">
+    <div class="col-md-12">
+        <div class="card">
+            <div class="card-header">
+                <strong>Add CustomerModel</strong>
+                <button *ngIf="type === 'view'"  [routerLink]="['../../list']"  cButton color="primary" variant="outline" class="back-button">
+                    <svg [cIcon]="icons.cilCaretLeft" size="md" title="List Icon"></svg>
+                </button>
+            </div>
+            <div class="card-body">
+                <form (ngSubmit)="submit()" [formGroup]="form" action="" method="post" enctype="multipart/form-data" class="form-horizontal">
+                    <div class="r form-group row">
+                        <label class="col-md-3 col-form-label">Full Name</label>
+                        <div class="col-md-9">
+                            <input formControlName="fullName" type="text" class="form-control" placeholder="Full Name">
+                        </div>
+                    </div>
+                    <div class="r form-group row">
+                        <label class="col-md-3 col-form-label">Address</label>
+                        <div class="col-md-9">
+                            <input formControlName="address" type="text" class="form-control" placeholder="Address">
+                        </div>
+                    </div>
+                    <div class="r form-group row">
+                        <label class="col-md-3 col-form-label">Mobile</label>
+                        <div class="col-md-9">
+                            <input formControlName="mobile" type="number" class="form-control" placeholder="mobile">
+                        </div>
+                    </div>
+                    <div class="r form-group row">
+                        <label class="col-md-3 col-form-label">Monthly Payment</label>
+                        <div class="col-md-9">
+                            <input formControlName="monthlyPayment" type="number" class="form-control" placeholder="Monthly Payment">
+                        </div>
+                    </div>
+                    <div class="r form-group row">
+                        <label class="col-md-3 col-form-label">Employee State</label>
+                        <div class="col-md-9">
+                            <select formControlName="employeeState" aria-label="State" cSelect>
+                                <option value="" selected>Select state</option>
+                                <option value="WORKING">WORKING</option>
+                                <option value="RESIGNED">RESIGNED</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="r form-group row" *ngIf="type != 'view'">
+                        <div class="col-10"></div>
+                        <div class="col-2">
+                            <button *ngIf="type === 'edit'" type="button" [routerLink]="['/employee/list']" cButton color="secondary">Cancel</button>
+                            <button type="submit" style="float: right" cButton color="primary">Save</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

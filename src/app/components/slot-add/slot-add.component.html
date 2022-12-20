@@ -1,0 +1,104 @@
+<div class="container">
+    <div *ngIf="!addFirstClicked && before" class="row" style="justify-content: center !important;"><button style="width: 36px;"  (click)="onAddClicked(true)" cButton>+</button></div>
+
+    <div class="input-group mb-3" *ngIf="addFirstClicked && before" style="justify-content: space-between;margin-top: 10px">
+        <div class="input-group-prepend" style="padding-top: 19px;">
+            <span style="margin-right: 5px">From</span>
+        </div>
+        <div class="input-group-prepend time">
+            <select (change)="sHChange()" [(ngModel)]="sH" class="form-control form-control-sm">
+                <option [value]="undefined" selected>S</option>
+                <option *ngFor="let h of startHoursB" [value]="h">{{h>9?h:'0'+h}}</option>
+            </select>
+        </div>
+        <div class="input-group-prepend" style="margin-top: 16px;">
+            <span>:</span>
+        </div>
+        <div class="input-group-prepend time">
+            <select (change)="formChangeEvent()" [(ngModel)]="sM" class="form-control form-control-sm">
+                <option [value]="undefined" selected>S</option>
+                <option *ngFor="let m of startMinutesB" [value]="m">{{m>9?m:'0'+m}}</option>
+            </select>
+        </div>
+
+        <div class="input-group-prepend" style="padding-top: 19px;">
+            <span style="margin-right: 5px;margin-left: 5px;">to</span>
+        </div>
+        <div class="input-group-prepend time">
+            <select (change)="eHChange()" [(ngModel)]="eH" class="form-control form-control-sm">
+                <option [value]="undefined" selected>S</option>
+                <option *ngFor="let h of endHoursB" [value]="h">{{h>9?h:'0'+h}}</option>
+            </select>
+        </div>
+        <div class="input-group-prepend" style="margin-top: 16px;">
+            <span>:</span>
+        </div>
+        <div class="input-group-prepend time">
+            <select (change)="formChangeEvent()" [(ngModel)]="eM" class="form-control form-control-sm">
+                <option [value]="undefined" selected>S</option>
+                <option class="service-small" *ngFor="let m of endMinutesB" [value]="m">{{m>9?m:'0'+m}}</option>
+            </select>
+        </div>
+
+        <div class="input-group-prepend" style="margin-left: 5px;padding-top: 10px">
+            <button cButton (click)="removeClick(true)" color="warning">
+                <svg [cIcon]="icons.cilDelete" size="md" title="List Icon"></svg>
+            </button>
+
+        </div>
+    </div>
+
+
+    <div *ngIf="slot" class="row" style="justify-content: center;">{{slot.start}} - {{ slot.end }}</div>
+    <div *ngIf="!addClicked" class="row" style="justify-content: center !important;"><button style="width: 36px;"  (click)="onAddClicked()" cButton>+</button></div>
+
+    <div class="input-group mb-3" *ngIf="addClicked" style="justify-content: space-between;margin-top: 10px">
+        <div class="input-group-prepend" style="padding-top: 19px;">
+            <span style="margin-right: 5px">From</span>
+        </div>
+        <div class="input-group-prepend time">
+            <select (change)="sHChange()" [(ngModel)]="sH" class="form-control form-control-sm">
+                <option [value]="undefined" selected>S</option>
+                <option *ngFor="let h of startHours" [value]="h">{{h>9?h:'0'+h}}</option>
+            </select>
+        </div>
+        <div class="input-group-prepend" style="margin-top: 16px;">
+            <span>:</span>
+        </div>
+        <div class="input-group-prepend time">
+            <select (change)="formChangeEvent()" [(ngModel)]="sM" class="form-control form-control-sm">
+                <option [value]="undefined" selected>S</option>
+                <option *ngFor="let m of startMinutes" [value]="m">{{m>9?m:'0'+m}}</option>
+            </select>
+        </div>
+
+        <div class="input-group-prepend" style="padding-top: 19px;">
+            <span style="margin-right: 5px;margin-left: 5px;">to</span>
+        </div>
+        <div class="input-group-prepend time">
+            <select (change)="eHChange()" [(ngModel)]="eH" class="form-control form-control-sm">
+                <option [value]="undefined" selected>S</option>
+                <option *ngFor="let h of endHours" [value]="h">{{h>9?h:'0'+h}}</option>
+            </select>
+        </div>
+        <div class="input-group-prepend" style="margin-top: 16px;">
+            <span>:</span>
+        </div>
+        <div class="input-group-prepend time">
+            <select (change)="formChangeEvent()" [(ngModel)]="eM" class="form-control form-control-sm">
+                <option [value]="undefined" selected>S</option>
+                <option class="service-small" *ngFor="let m of endMinutes" [value]="m">{{m>9?m:'0'+m}}</option>
+            </select>
+        </div>
+
+        <div class="input-group-prepend" style="margin-left: 5px;padding-top: 10px">
+            <button cButton (click)="removeClick()" color="warning">
+                <svg [cIcon]="icons.cilDelete" size="md" title="List Icon"></svg>
+            </button>
+
+        </div>
+    </div>
+
+
+
+</div>

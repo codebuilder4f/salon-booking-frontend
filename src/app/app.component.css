@@ -1,0 +1,63 @@
+.card-body-custom{
+  padding: 0 !important;
+}
+td button {
+  margin-left: 10px !important;
+}
+
+.r{
+  margin-top: 10px;
+}
+
+.text-danger-custom{
+  cursor: pointer;
+  border: 1px solid #e55352 !important;
+  padding: 5px;
+  border-radius: 5px;
+}
+.text-danger-custom:hover{
+  background: #f89696 !important;
+  padding: 5px 6px;
+}
+
+.text-warning-custom{
+  cursor: pointer;
+  margin-left: 5px;
+  border: 1px solid #fabf51 !important;
+  padding: 5px;
+  border-radius: 5px;
+}
+.text-warning-custom:hover{
+  background: #f6e2b9 !important;
+  padding: 5px 6px;
+}
+
+.text-success-custom{
+  cursor: pointer;
+  margin-left: 5px;
+  border: 1px solid #2db75c !important;
+  padding: 5px;
+  border-radius: 5px;
+}
+.text-success-custom:hover{
+  background: #a2f3b9 !important;
+  padding: 5px 6px;
+}
+
+.text-download-custom{
+  cursor: pointer;
+  margin-left: 5px;
+  border: 1px solid #9da5b1 !important;
+  padding: 5px;
+  border-radius: 5px;
+}
+
+.text-download-custom:hover{
+  background: #dfedf5 !important;
+  padding: 5px 6px;
+}
+
+
+.back-button{
+  float: right;
+}

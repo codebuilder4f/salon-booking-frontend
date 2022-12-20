@@ -1,0 +1,47 @@
+<!--<c-card>-->
+<!--    <c-card-body>-->
+<!--        <div class="row" [formGroup]="form">-->
+<!--            <div class="col-md-4 col-sm-4 col-lg-4">-->
+<!--                <input cFormControl (keyup)="filter()" type="text" formControlName="name" placeholder="Stock Item">-->
+<!--            </div>-->
+<!--        </div>-->
+<!--    </c-card-body>-->
+<!--</c-card>-->
+
+<div class="table-responsive card">
+    <table class="table table-hover">
+        <thead>
+        <tr>
+            <th scope="col">Payment Date</th>
+            <th scope="col">Payment Type</th>
+            <th scope="col">Amount</th>
+            <th scope="col">Actions</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr *ngFor="let l of li">
+            <td>{{l.paymentDate | date:'longDate':'UTC'}}</td>
+            <td>{{l.paymentType}}</td>
+            <td>{{l.amount}}</td>
+            <td >
+                <a (click)="delete(l)" class="text-danger-custom">
+                    <c-icon class="text-danger" name="cil-trash" size="lg"></c-icon>
+                </a>
+                <a [state]="{type: 'edit', data: l}" [routerLink]="['../edit', l.id]" class="text-warning-custom">
+                    <c-icon class="text-warning" name="cil-pencil" size="lg"></c-icon>
+                </a>
+                <a [state]="{type: 'view', data: l}" [routerLink]="['../view', l.id]" class="text-success-custom">
+                    <c-icon class="text-success" name="cil-magnifying-glass" size="lg"></c-icon>
+                </a>
+            </td>
+        </tr>
+        </tbody>
+        <tfoot>
+        <tr>
+            <td colSpan="4" style="padding-bottom: 0 !important;">
+                <app-custom-pagination (pageChange)="pageChange($event)" [total]="totalItems" [pageSize]="pageSize"></app-custom-pagination>
+            </td>
+        </tr>
+        </tfoot>
+    </table>
+</div>

@@ -1,0 +1,106 @@
+<c-card>
+    <c-card-body>
+        <div class="row" [formGroup]="form">
+            <div class="col-md-2 col-sm-2 col-lg-2">
+                <input cFormControl  type="month" formControlName="month" placeholder="Month">
+            </div>
+            <div class="col-md-2 col-sm-2 col-lg-2">
+                <button [disabled]="!form.valid" (click)="filter()" cButton>Search</button>
+            </div>
+            <div class="col-md-8 col-sm-8 col-lg-8">
+                <div class="row" style="justify-content: space-between;margin-right: 10px;">
+                    <c-widget-stat-a style="padding-bottom: 10px;" class="col-lg-2 col-md-2 col-sm-2" color="primary" [title]="'Income ' + income">
+                    </c-widget-stat-a>
+                    <c-widget-stat-a style="padding-bottom: 10px;" class="col-lg-2 col-md-2 col-sm-2" color="info" [title]="'Stock Cost '+ stockCost">
+                    </c-widget-stat-a>
+                    <c-widget-stat-a style="padding-bottom: 10px;" class="col-lg-2 col-md-2 col-sm-2" color="warning" [title]="'Employee Payment '+ employeeCost">
+                    </c-widget-stat-a>
+                    <c-widget-stat-a style="padding-bottom: 10px;" class="col-lg-2 col-md-2 col-sm-2" color="danger" [title]="'Addition Payment '+ otherCost ">
+                    </c-widget-stat-a>
+                    <c-widget-stat-a style="padding-bottom: 10px;" class="col-lg-2 col-md-2 col-sm-2" color="success" [title]="'Net Income '+ netIncome ">
+                    </c-widget-stat-a>
+                </div>
+            </div>
+        </div>
+    </c-card-body>
+</c-card>
+
+<br>
+
+<c-card>
+    <c-card-body>
+        <div class="row">
+            <div class="col-lg-3 col-md-3 col-sm-3">
+                <div class="table-responsive card">
+                    <table class="table table-hover">
+                        <thead>
+                        <tr>
+                            <th style="text-align: center" colspan="3" scope="col">Daily Approved Bookings</th>
+                        </tr>
+                        <tr>
+                            <th scope="col">No</th>
+                            <th scope="col">Date</th>
+                            <th scope="col">Amount </th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr *ngFor="let l of data;let i = index">
+                            <td>{{i +1}}</td>
+                            <td>{{l.day | date:'MM/dd/yy':'UTC'}}</td>
+                            <td>{{l.amount}}</td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <div class="col-lg-3 col-md-3 col-sm-3">
+                <div class="table-responsive card">
+                    <table class="table table-hover">
+                        <thead>
+                        <tr>
+                            <th style="text-align: center" colspan="3" scope="col">Daily Stock Adding</th>
+                        </tr>
+                        <tr>
+                            <th scope="col">Name</th>
+                            <th scope="col">Date</th>
+                            <th scope="col">Amount </th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr *ngFor="let l of stocks;let i = index">
+                            <td>{{l.name}}</td>
+                            <td>{{l.addedDate | date:'MM/dd/yy':'UTC'}}</td>
+                            <td>{{l.price}}</td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <div class="col-lg-6 col-md-6 col-sm-6">
+                <div class="table-responsive card">
+                    <table class="table table-hover">
+                        <thead>
+                        <tr>
+                            <th style="text-align: center" colspan="4" scope="col">Daily Payments</th>
+                        </tr>
+                        <tr>
+                            <th scope="col">Description</th>
+                            <th scope="col">Date</th>
+                            <th scope="col">Type</th>
+                            <th scope="col">Amount </th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr *ngFor="let l of payments;let i = index">
+                            <td>{{l.description}}</td>
+                            <td>{{l.paymentDate | date:'MM/dd/yy':'UTC'}}</td>
+                            <td>{{l.paymentType}}</td>
+                            <td>{{l.amount}}</td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </c-card-body>
+</c-card>

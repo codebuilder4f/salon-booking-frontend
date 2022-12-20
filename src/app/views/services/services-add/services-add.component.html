@@ -1,0 +1,41 @@
+<div class="row">
+    <div class="col-md-12">
+        <div class="card">
+            <div class="card-header">
+                <strong>Add CustomerModel</strong>
+                <button *ngIf="type === 'view'"  [routerLink]="['../../list']"  cButton color="primary" variant="outline" class="back-button">
+                    <svg [cIcon]="icons.cilCaretLeft" size="md" title="List Icon"></svg>
+                </button>
+            </div>
+            <div class="card-body">
+                <form (ngSubmit)="submit()" [formGroup]="form" action="" method="post" enctype="multipart/form-data" class="form-horizontal">
+                    <div class="r form-group row">
+                        <label class="col-md-3 col-form-label">Name</label>
+                        <div class="col-md-9">
+                            <input formControlName="name" type="text" class="form-control" placeholder="Name">
+                        </div>
+                    </div>
+                    <div class="r form-group row">
+                        <label class="col-md-3 col-form-label">Description</label>
+                        <div class="col-md-9">
+                            <input formControlName="description" type="text" class="form-control" placeholder="Description">
+                        </div>
+                    </div>
+                    <div class="r form-group row">
+                        <label class="col-md-3 col-form-label">Price</label>
+                        <div class="col-md-9">
+                            <input formControlName="price" type="number" class="form-control" placeholder="Price">
+                        </div>
+                    </div>
+                    <div class="r form-group row" *ngIf="type != 'view'">
+                        <div class="col-10"></div>
+                        <div class="col-2">
+                            <button *ngIf="type === 'edit'" type="button" [routerLink]="['/services/list']" cButton color="secondary">Cancel</button>
+                            <button type="submit" style="float: right" cButton color="primary">Save</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

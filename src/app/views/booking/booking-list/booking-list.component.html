@@ -1,0 +1,71 @@
+<c-card>
+    <c-card-body>
+        <div class="row" (ngSubmit)="submit()" [formGroup]="form">
+            <div class="col-md-4 col-sm-4 col-lg-4">
+                <select formControlName="bookingState" (change)="filter()" aria-label="State" cSelect>
+                    <option value="" selected>Select state</option>
+                    <option value="PENDING">PENDING</option>
+                    <option value="ADVANCED">ADVANCED</option>
+                    <option value="COMPLETED">COMPLETED</option>
+                </select>
+            </div>
+            <div class="col-md-4 col-sm-4 col-lg-4">
+                <input cFormControl (keyup)="filter()" type="text" formControlName="customerName" placeholder="Customer Name">
+            </div>
+            <div *ngIf="isSearching" class="col-md-1 col-sm-1 col-lg-1" style="padding-top: 5px">
+                <a (click)="getData()" class="text-danger-custom">
+                    <c-icon class="text-danger" name="cil-trash" size="lg"></c-icon>
+                </a>
+            </div>
+        </div>
+    </c-card-body>
+</c-card>
+
+<div class="table-responsive card">
+    <table class="table table-hover">
+        <thead>
+        <tr>
+            <th scope="col">No</th>
+            <th scope="col">Date</th>
+            <th scope="col">Customer Name</th>
+            <th scope="col">From</th>
+            <th scope="col">To</th>
+            <th scope="col">Advanced</th>
+            <th scope="col">Total Amount</th>
+            <th scope="col">State</th>
+            <th scope="col">Action</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr *ngFor="let l of li; let i=index">
+            <td>{{i+1}}</td>
+            <td>{{l.start | date:'longDate':'UTC'}}</td>
+            <td>{{l.customer.name}}</td>
+            <td>{{l.start | date:'shortTime':'UTC'}}</td>
+            <td>{{l.end | date:'shortTime':'UTC'}}</td>
+            <td>LKR {{getTotalAdvance(l.advancedPayments)}}</td>
+            <td>LKR {{l.totalAmount}}</td>
+            <td>
+                <c-badge *ngIf="l.bookingState == 'COMPLETED'" color="success">{{l.bookingState}}</c-badge>
+                <c-badge *ngIf="l.bookingState !== 'COMPLETED'" color="secondary">{{l.bookingState}}</c-badge>
+            </td>
+            <td>
+<!--                <a (click)="delete(l)" class="text-danger-custom">-->
+<!--                    <c-icon class="text-danger" name="cil-trash" size="lg"></c-icon>-->
+<!--                </a>-->
+                <a (click)="bill(l)" class="text-download-custom"><c-icon class="text-secondary" name="cil-cloud-download" size="lg"></c-icon></a>
+                <a [state]="{type: 'edit', data: l}" [routerLink]="['../edit', l.id]" class="text-warning-custom"><c-icon class="text-warning" name="cil-pencil" size="lg"></c-icon></a>
+                <a [state]="{type: 'view', data: l}" [routerLink]="['../view', l.id]" class="text-success-custom"><c-icon class="text-success" name="cil-magnifying-glass" size="lg"></c-icon></a>
+            </td>
+        </tr>
+        </tbody>
+        <tfoot>
+        <tr>
+            <td colSpan="10" style="padding-bottom: 0 !important;">
+                <app-custom-pagination (pageChange)="pageChange($event)" [total]="totalItems" [pageSize]="pageSize">
+                </app-custom-pagination>
+            </td>
+        </tr>
+        </tfoot>
+    </table>
+</div>

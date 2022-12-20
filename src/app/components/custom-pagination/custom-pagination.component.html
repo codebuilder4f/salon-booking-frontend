@@ -1,0 +1,49 @@
+<!--<c-pagination aria-label="Page navigation example">-->
+<!--  <li cPageItem>-->
+<!--    <span cPageLink >Previous</span>-->
+<!--  </li>-->
+<!--  <li cPageItem>-->
+<!--    <a cPageLink >1</a>-->
+<!--  </li>-->
+<!--  <li cPageItem [active]="true">-->
+<!--    <span cPageLink >2</span>-->
+<!--  </li>-->
+<!--  <li cPageItem>-->
+<!--    <a cPageLink >3</a>-->
+<!--  </li>-->
+<!--  <li cPageItem>-->
+<!--    <a cPageLink >Next</a>-->
+<!--  </li>-->
+<!--</c-pagination>-->
+
+<ngb-pagination (pageChange)="change($event)" [pageSize]="pageSize" [collectionSize]="total" [(page)]="page" [boundaryLinks]="true">
+  <ng-template ngbPaginationPages let-page let-pages="pages">
+    <li class="ngb-custom-pages-item" *ngIf="pages.length > 0">
+      <div class="mb-3 d-flex flex-nowrap px-2">
+        <label
+          id="paginationInputLabel"
+          for="paginationInput"
+          class="col-form-label me-2 ms-1"
+        >Page</label>
+        <input #i
+               [disabled]="true"
+               type="text"
+               inputmode="numeric"
+               pattern="[0-9]*"
+               class="form-control custom-pages-input"
+               id="paginationInput"
+               [value]="page"
+               (keyup.enter)="selectPage(i.value)"
+               (blur)="selectPage(i.value)"
+               (input)="formatInput($any($event).target)"
+               aria-labelledby="paginationInputLabel paginationDescription"
+               style="width: 2.5rem"
+        />
+        <span id="paginationDescription" class="col-form-label text-nowrap px-2">
+                  of {{pages.length}}</span>
+      </div>
+    </li>
+  </ng-template>
+</ngb-pagination>
+
+<!--<pre>Current page: {{page}}</pre>-->
