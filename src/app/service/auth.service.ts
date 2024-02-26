@@ -21,12 +21,12 @@ export class AuthService {
     private http: HttpClient,
     private router: Router
   ) {
-    this.domain = constService.domain
+    //this.domain = constService.domain
     this.url = `${this.domain}/auth`
   }
 
   public logOut() {
-    this.constService.removeAllAuthData();
+    //this.constService.removeAllAuthData();
     this.router.navigate(['/login'])
   }
 
@@ -35,14 +35,14 @@ export class AuthService {
   }
 
   public login(email: string, password: string) {
-    this.http.post<JWTRes>(`${this.url}/login`, { userName: email, password: password })
+    /*this.http.post<JWTRes>(`${this.url}/login`, { userName: email, password: password })
       .subscribe(res => {
         this.constService.saveToken(res.type + " " + res.token)
         this.constService.setRoles(res.roles)
         this.constService.setRefreshToken(res.refreshToken)
         this.startRefreshTokenTimer();
-        this.router.navigate(['/dashboard'])
-      })
+      })*/
+    this.router.navigate(['/dashboard'])
   }
 
   public isAuthenticated(): boolean {
