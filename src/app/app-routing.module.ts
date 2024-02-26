@@ -25,28 +25,28 @@ const routes: Routes = [
       {
         path: 'booking',
         loadChildren: () => import('./views/booking/booking.module').then((m) => m.BookingModule),
-        canActivate: [AuthGuard],
+       // canActivate: [AuthGuard],
         data: {roles: [Role.ROLE_ADMIN]}
       },
       {
         path: 'employee',
         loadChildren: () =>
             import('./views/employee/employee.module').then((m) => m.EmployeeModule),
-        canActivate: [AuthGuard],
+       // canActivate: [AuthGuard],
         data: {roles: [Role.ROLE_ADMIN]}
       },
       {
         path: 'services',
         loadChildren: () =>
             import('./views/services/services.module').then((m) => m.ServicesModule),
-        canActivate: [AuthGuard],
+       // canActivate: [AuthGuard],
         data: {roles: [Role.ROLE_ADMIN]}
       },
       {
         path: 'stock',
         loadChildren: () =>
           import('./views/stock/stock.module').then((m) => m.StockModule),
-        canActivate: [AuthGuard],
+        //canActivate: [AuthGuard],
         data: {roles: [Role.ROLE_ADMIN]}
       },
       {
@@ -54,14 +54,14 @@ const routes: Routes = [
         loadChildren: () =>
           import('./views/customer/customer.module').then((m) => m.CustomerModule),
         data: {roles: [Role.ROLE_ADMIN]},
-        canActivate: [AuthGuard],
+        //canActivate: [AuthGuard],
       },
       {
         path: 'payment',
         loadChildren: () =>
             import('./views/payment/payment.module').then((m) => m.PaymentModule),
         data: {roles: [Role.ROLE_ADMIN]},
-        canActivate: [AuthGuard],
+        //canActivate: [AuthGuard],
 
       },
       {
@@ -69,14 +69,14 @@ const routes: Routes = [
         loadChildren: () =>
             import('./views/business-overview/business-overview.module').then((m) => m.BusinessOverviewModule),
         data: {roles: [Role.ROLE_ADMIN]},
-        canActivate: [AuthGuard],
+        //canActivate: [AuthGuard],
       },
       {
         path: 'dashboard',
         loadChildren: () =>
           import('./views/dashboard/dashboard.module').then((m) => m.DashboardModule),
         data: {roles: [Role.ROLE_ADMIN]},
-        canActivate: [AuthGuard],
+        //canActivate: [AuthGuard],
       },
       {
         path: 'theme',
